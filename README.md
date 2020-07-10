@@ -122,14 +122,3 @@ public class HashMd5GenericUDF extends GenericUDF {
 ```shell
 mvn clean package
 ```
-
-### 上传资源
-DataCompute 大数据开发套件-》资源管理 上传资源，例如：datacompute-udf-1.0-SNAPSHOT.jar
-
-### 创建函数
-DataCompute 大数据开发套件-》创建函数，例如创建md5函数，创建函数表单填写信息：
-函数名：md5
-类名：com.tongdun.datacompute.udf.json.HashMd5UDF
-资源：[选择上传的资源]
-
-***注意**：类型必须包含完整的java pacakge路径*
