@@ -1,10 +1,9 @@
 package com.dataworker.udf.json;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
 import org.apache.hadoop.hive.ql.metadata.HiveException;
@@ -25,6 +24,8 @@ import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectIn
 @Description(name = "json_to_map", value = "_FUNC_(text) - "
         + "Creates a map by parsing json text ")
 public class GenericUDFStringToMap extends GenericUDF {
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     private transient Converter soi_text;
 
     @Override
@@ -53,11 +54,12 @@ public class GenericUDFStringToMap extends GenericUDF {
             return ret;
         }
 
-        JSONObject json = JSON.parseObject(text);
-        for (Map.Entry<String, Object> entry : json.entrySet()) {
-            ret.put(entry.getKey(), entry.getValue().toString());
+        try {
+            ret = objectMapper.readValue(text, new TypeReference<LinkedHashMap<String, Object>>() {
+            });
+        } catch (Exception e) {
+            throw new HiveException("解析json 失败: " + text, e);
         }
-
         return ret;
     }
 
