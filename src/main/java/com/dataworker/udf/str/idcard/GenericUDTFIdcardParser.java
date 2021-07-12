@@ -1,6 +1,5 @@
 package com.dataworker.udf.str.idcard;
 
-import com.dataworker.udf.ip.GenericUDTFIpGeo;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -33,7 +32,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GenericUDTFIdcardParser extends GenericUDTF {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GenericUDTFIpGeo.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GenericUDTFIdcardParser.class);
 
     private static final TIntObjectHashMap countyInfoMap = new TIntObjectHashMap();
 
