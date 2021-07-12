@@ -11,23 +11,22 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
-        <module-rule-detail-version>3.3.8</module-rule-detail-version>
-        <hadoop.version>3.3.0</hadoop.version>
-        <hive.version>2.3.7</hive.version>
+        <java.version>8</java.version>
+        <hive.version>2.3.9</hive.version>
+        <jackson.version>2.12.4</jackson.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.11.1</version>
+            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.sf.trove4j</groupId>
-            <artifactId>trove4j</artifactId>
-            <version>3.0.3</version>
+            <artifactId>core</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>
@@ -80,19 +79,19 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.24</version>
+            <version>1.7.31</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.7.24</version>
+            <version>1.7.31</version>
         </dependency>
         <!-- logback -->
         <dependency>
@@ -108,7 +107,7 @@
         <dependency>
             <groupId>com.klarna</groupId>
             <artifactId>hiverunner</artifactId>
-            <version>5.2.1</version>
+            <version>5.3.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -116,11 +115,6 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-mapreduce-client-core</artifactId>
-            <version>${hadoop.version}</version>
         </dependency>
 
         <dependency>
@@ -132,13 +126,13 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.23</version>
+            <version>1.2.6</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.10</version>
+            <version>4.5.13</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-codec</artifactId>
@@ -188,7 +182,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
