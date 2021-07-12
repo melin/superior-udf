@@ -1,4 +1,4 @@
-package com.dataworker.udf.str;
+package com.dataworker.udf.text;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TObjectIntHashMap;

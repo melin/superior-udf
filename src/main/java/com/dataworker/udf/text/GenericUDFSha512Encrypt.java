@@ -1,4 +1,4 @@
-package com.dataworker.udf.str;
+package com.dataworker.udf.text;
 
 import java.security.MessageDigest;
 import org.apache.hadoop.hive.ql.exec.UDF;

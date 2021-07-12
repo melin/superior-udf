@@ -1,4 +1,4 @@
-package com.dataworker.udf.str;
+package com.dataworker.udf.text;
 
 import com.google.common.io.BaseEncoding;
 import org.apache.commons.lang3.StringUtils;

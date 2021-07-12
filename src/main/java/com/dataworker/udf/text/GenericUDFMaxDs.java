@@ -1,4 +1,4 @@
-package com.dataworker.udf.str;
+package com.dataworker.udf.text;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.httpclient.HttpStatus;

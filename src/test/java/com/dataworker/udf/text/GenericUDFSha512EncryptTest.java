@@ -1,4 +1,4 @@
-package com.dataworker.udf.string;
+package com.dataworker.udf.text;
 
 import com.klarna.hiverunner.HiveShell;
 import com.klarna.hiverunner.StandaloneHiveRunner;
@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 @RunWith(StandaloneHiveRunner.class)
 public class GenericUDFSha512EncryptTest {
 
-    @HiveSQL(files = {"string/sha512_encrypt.sql"}, autoStart = true)
+    @HiveSQL(files = {"text/sha512_encrypt.sql"}, autoStart = true)
     public HiveShell hiveShell;
 
     @Test

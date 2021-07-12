@@ -1,4 +1,4 @@
-package com.dataworker.udf.str;
+package com.dataworker.udf.text;
 
 import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.hive.ql.exec.UDF;

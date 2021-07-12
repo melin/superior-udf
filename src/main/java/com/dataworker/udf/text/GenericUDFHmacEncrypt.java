@@ -1,4 +1,4 @@
-package com.dataworker.udf.str;
+package com.dataworker.udf.text;
 
 import org.apache.spark.sql.DataWorkerUDFException;
 import org.apache.commons.codec.digest.HmacUtils;

@@ -1,4 +1,4 @@
-package com.dataworker.udf.str.idcard;
+package com.dataworker.udf.text.idcard;
 
 import com.google.common.collect.Maps;
 

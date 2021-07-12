@@ -16,39 +16,39 @@
  * limitations under the License.
  */
 
-package com.dataworker.udf.str.mark;
+package com.dataworker.udf.text.mark;
 
 import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 
 
-@Description(name = "mask_show_last_n",
-             value = "masks all but last n characters of the value",
+@Description(name = "mask_last_n",
+             value = "masks the last n characters of the value",
              extended = "Examples:\n "
-                      + "  mask_show_last_n(ccn, 8)\n "
-                      + "  mask_show_last_n(ccn, 8, 'x', 'x', 'x')\n "
+                      + "  mask_last_n(ccn, 8)\n "
+                      + "  mask_last_n(ccn, 8, 'x', 'x', 'x')\n "
                       + "Arguments:\n "
-                      + "  mask_show_last_n(value, charCount, upperChar, lowerChar, digitChar, otherChar, numberChar)\n "
+                      + "  mask_last_n(value, charCount, upperChar, lowerChar, digitChar, otherChar, numberChar)\n "
                       + "    value      - value to mask. Supported types: TINYINT, SMALLINT, INT, BIGINT, STRING, VARCHAR, CHAR\n "
                       + "    charCount  - number of characters. Default value: 4\n "
                       + "    upperChar  - character to replace upper-case characters with. Specify -1 to retain original character. Default value: 'X'\n "
                       + "    lowerChar  - character to replace lower-case characters with. Specify -1 to retain original character. Default value: 'x'\n "
                       + "    digitChar  - character to replace digit characters with. Specify -1 to retain original character. Default value: 'n'\n "
                       + "    otherChar  - character to replace all other characters with. Specify -1 to retain original character. Default value: -1\n "
-                      + "    numberChar - character to replace digits in a number with. Valid values: 0-9. Default value: '1'\n "
+                     + "     numberChar - character to replace digits in a number with. Valid values: 0-9. Default value: '1'\n "
             )
-public class GenericUDFMaskShowLastN extends BaseMaskUDF {
-  public static final String UDF_NAME = "mask_show_last_n";
+public class GenericUDFMaskLastN extends BaseMaskUDF {
+  public static final String UDF_NAME = "mask_last_n";
 
-  public GenericUDFMaskShowLastN() {
-    super(new MaskShowLastNTransformer(), UDF_NAME);
+  public GenericUDFMaskLastN() {
+    super(new MaskLastNTransformer(), UDF_NAME);
   }
 }
 
-class MaskShowLastNTransformer extends MaskTransformer {
+class MaskLastNTransformer extends MaskTransformer {
   int charCount = 4;
 
-  public MaskShowLastNTransformer() {
+  public MaskLastNTransformer() {
     super();
   }
 
@@ -63,22 +63,17 @@ class MaskShowLastNTransformer extends MaskTransformer {
     }
   }
 
-
   @Override
   String transform(final String value) {
-    if(value.length() <= charCount) {
-      return value;
-    }
+    final StringBuilder ret      = new StringBuilder(value.length());
+    final int           startIdx = value.length() <= charCount ? 0 : (value.length() - charCount);
 
-    final StringBuilder ret    = new StringBuilder(value.length());
-    final int           endIdx = value.length() - charCount;
-
-    for(int i = 0; i < endIdx; i++) {
-      ret.appendCodePoint(transformChar(value.charAt(i)));
-    }
-
-    for(int i = endIdx; i < value.length(); i++) {
+    for(int i = 0; i < startIdx; i++) {
       ret.appendCodePoint(value.charAt(i));
+    }
+
+    for(int i = startIdx; i < value.length(); i++) {
+      ret.appendCodePoint(transformChar(value.charAt(i)));
     }
 
     return ret.toString();
@@ -95,7 +90,7 @@ class MaskShowLastNTransformer extends MaskTransformer {
     byte ret = 0;
     int  pos = 1;
     for(int i = 0; val != 0; i++) {
-      if(i >= charCount) { // mask this digit
+      if(i < charCount) { // mask this digit
         ret += maskedNumber * pos;
       } else { //retain this digit
         ret += (val % 10) * pos;
@@ -123,7 +118,7 @@ class MaskShowLastNTransformer extends MaskTransformer {
     short ret = 0;
     int   pos = 1;
     for(int i = 0; val != 0; i++) {
-      if(i >= charCount) { // mask this digit
+      if(i < charCount) { // mask this digit
         ret += maskedNumber * pos;
       } else { // retain this digit
         ret += (val % 10) * pos;
@@ -151,7 +146,7 @@ class MaskShowLastNTransformer extends MaskTransformer {
     int ret = 0;
     int pos = 1;
     for(int i = 0; val != 0; i++) {
-      if(i >= charCount) { // mask this digit
+      if(i < charCount) { // mask this digit
         ret += maskedNumber * pos;
       } else { // retain this digit
         ret += (val % 10) * pos;
@@ -179,10 +174,10 @@ class MaskShowLastNTransformer extends MaskTransformer {
     long ret = 0;
     long pos = 1;
     for(int i = 0; val != 0; i++) {
-      if(i >= charCount) { // mask this digit
-        ret += (maskedNumber * pos);
+      if(i < charCount) { // mask this digit
+        ret += maskedNumber * pos;
       } else { // retain this digit
-        ret += ((val % 10) * pos);
+        ret += (val % 10) * pos;
       }
 
       val /= 10;

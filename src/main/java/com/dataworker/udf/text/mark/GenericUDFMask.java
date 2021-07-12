@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.dataworker.udf.str.mark;
+package com.dataworker.udf.text.mark;
 
 
 import org.apache.hadoop.hive.ql.exec.Description;

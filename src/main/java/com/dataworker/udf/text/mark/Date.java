@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dataworker.udf.str.mark;
+package com.dataworker.udf.text.mark;
 
 import java.time.Instant;
 import java.time.LocalDate;
