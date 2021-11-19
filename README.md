@@ -2,7 +2,7 @@
 1. [Hive- UDF&GenericUDF](http://www.jianshu.com/p/ca9dce6b5c37)
 2. [HiveRunner](https://github.com/klarna/HiveRunner)
 
-## DataCompute 自定义UDF函数
+## 自定义UDF函数
 每创建一个UDF函数，需要创建一个UDF类，UDF类需要集成如下两个类中的一个：
 
 1. org.apache.hadoop.hive.ql.exec.UDF
